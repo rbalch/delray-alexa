@@ -83,10 +83,6 @@ class FallbackIntentHandler(AbstractRequestHandler):
         logger.info("In FallbackIntentHandler")
         speech = get_delray_beach_info()
         return handler_input.speak(speech).response
-        # speech = "Hmm, I'm not sure. You can say Hello or Help. What would you like to do?"
-        # reprompt = "I didn't catch that. What can I help you with?"
-
-        # return handler_input.response_builder.speak(speech).ask(reprompt).response
 
 class SessionEndedRequestHandler(AbstractRequestHandler):
     """Handler for Session End."""
