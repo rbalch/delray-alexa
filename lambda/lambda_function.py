@@ -27,12 +27,11 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome, I can give you beach conditions for Delray Beach. Would you like to hear them?"
+        speak_output = get_delray_beach_info()
 
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                .ask(speak_output)
                 .response
         )
 
@@ -134,12 +133,11 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
         # type: (HandlerInput, Exception) -> Response
         logger.error(exception, exc_info=True)
 
-        speak_output = "Sorry, I had trouble doing what you asked. Please try again."
+        speak_output = get_delray_beach_info()
 
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                .ask(speak_output)
                 .response
         )
 
