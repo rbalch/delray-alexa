@@ -22,6 +22,7 @@ def get_delray_beach_info():
     surf_temperature = ''
     hazards = ''
     high_tide = ''
+    surf_conditions = ''
     soup = get_soup(URL)
 
     for rowi, row in enumerate(soup.table.find_all('tr')):
@@ -33,12 +34,19 @@ def get_delray_beach_info():
             air_temperature = row.find_all('td')[1].text.strip()
         elif rowi == 4:
             surf_temperature = row.find_all('td')[1].text.strip()
+        elif rowi == 6:
+            surf_conditions = row.find_all('td')[1].text.strip()\
+                .replace('-', ' to ')\
+                .replace('ft', ' foot')
         elif rowi == 7:
             hazards = row.find_all('td')[1].text.strip().replace('/', 'and')
         elif rowi == 9:
             high_tide = row.find_all('td')[1].text.strip()
 
-    message = f'For {date}, the flag color is {flag_color}, the air temperature is {air_temperature}, the surf temperature is {surf_temperature}, the hazards are {hazards}, and high tide is at {high_tide}.'
+    message = f'For {date}, the flag color is {flag_color}, the air temperature is {air_temperature}, and surf temperature is {surf_temperature}.'
+    if hazards:
+        message += f' Hazards include {hazards}.'
+    message += f' High tide is at {high_tide}. Surf conditions are {surf_conditions}.'
     return message
 
 
