@@ -45,8 +45,13 @@ def get_delray_beach_info():
 
     message = f'For {date}, the flag color is {flag_color}, the air temperature is {air_temperature}, and surf temperature is {surf_temperature}.'
     if hazards:
-        message += f' Hazards include {hazards}.'
-    message += f' High tide is at {high_tide}. Surf conditions are {surf_conditions}.'
+        if hazards == 'Low Hazard':
+            message += f' {hazards}.'
+        else:
+            message += f' Hazards include {hazards}.'
+    message += f' High tide is at {high_tide}.'
+    if surf_conditions:
+        message += f' Surf conditions are {surf_conditions}.'
     return message
 
 
